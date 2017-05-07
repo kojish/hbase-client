@@ -6,13 +6,17 @@ You should install the following before you start:
 3. (Optional) Apache HBase 1.1.2 if you want to try the standalone mode.
 
 Here is how to run the example.
-```>git clone https://github.com/kojish/hbase-client.git
+```command line
+>git clone https://github.com/kojish/hbase-client.git
+>cd hbase-client
 >mvn package
 >java -cp ./target/hbase-client-example-0.0.1-SNAPSHOT.jar ms.epg.example.HbaseClientExample
+```
+Then, you will see the following log.
+```
 log4j:WARN No appenders could be found for logger (org.apache.hadoop.metrics2.lib.MutableMetricsFactory).
 log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-Table [hvac] is already existed. Deleting...
 Creating new table... Done.
 Row key: B1234-32-1494133008, Column Family: cp, Qualifier: a, Value : 9
 Row key: B1234-32-1494133008, Column Family: cp, Qualifier: id, Value : XE3025
