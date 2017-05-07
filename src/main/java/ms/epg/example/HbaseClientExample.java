@@ -40,7 +40,7 @@ public class HbaseClientExample {
     private final String COLUMN_FAMILY_CP = "cp";
     private final String COLUMN_FAMILY_CT = "ct";
     
-	private Configuration config;
+    private Configuration config;
     private Connection connection;
 
     /*
@@ -63,16 +63,16 @@ public class HbaseClientExample {
         }
     }
 
-	public void setUp() throws IOException {
+    public void setUp() throws IOException {
         config = HBaseConfiguration.create();
         config.set("zookeeper.znode.parent","/hbase-unsecure");
         config.set("hbase.zookeeper.quorum", ZOOKEEPER_QUORUM);
         connection = ConnectionFactory.createConnection();
-	}
+    }
 	
-	public void close() throws IOException {
+    public void close() throws IOException {
 		if(connection != null) connection.close();
-	}
+    }
 
     // Write the given data to the table. Assuming the table is created in createTable().
     public void write(String tableName, String[][] data) throws IOException {
@@ -121,5 +121,5 @@ public class HbaseClientExample {
         hc.write(TABLE_NAME, src);
         hc.readAll(TABLE_NAME);
         hc.close();
-	}
+    }
 }
