@@ -5,7 +5,7 @@ You should install the following before you start:
 2. Maven 3.x
 3. (Optional) Apache HBase 1.1.2 if you want to try the standalone mode.
 
-Here is how to run the example.
+Here is how to compile and run the example.
 ```command line
 >git clone https://github.com/kojish/hbase-client.git
 >cd hbase-client
