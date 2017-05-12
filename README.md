@@ -1,4 +1,4 @@
-This is an HBase client example. It is tested with HBase version 1.1.2 for both standalone mode ~~and fully distributed mode on Azure HDInsight (HDI 3.6)~~ . 
+This is an HBase client example. It is tested with HBase version 1.1.2 (standard mode only at this time).
 
 You should install the following before you start:
 1. JDK 1.8.x
