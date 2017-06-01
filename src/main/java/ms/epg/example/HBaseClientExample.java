@@ -36,7 +36,7 @@ import org.apache.hadoop.hbase.io.compress.Compression.Algorithm;
  *    +-----------------------------------------------------+
  */
 public class HBaseClientExample {
-    private final String ZOOKEEPER_QUORUM = "localhost";
+    private final String ZOOKEEPER_QUORUM = "zk2-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net,zk1-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net,zk0-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net";
     private final String COLUMN_FAMILY_CP = "cp";
     private final String COLUMN_FAMILY_CT = "ct";
     
@@ -115,7 +115,7 @@ public class HBaseClientExample {
         { "G4119-90-1494133009", "11", "RG8021", "32", "30"},
         { "E3039-21-1494133010", "14", "MU8367", "16", "23"}};
         
-        HbaseClientExample hc = new HbaseClientExample();
+        HBaseClientExample hc = new HBaseClientExample();
         hc.setUp();
         hc.createTable(TABLE_NAME);
         hc.write(TABLE_NAME, src);
