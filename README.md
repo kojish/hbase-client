@@ -1,6 +1,6 @@
-This is an HBase client example. It is tested with HBase version 1.1.2 and HDInsight HBase 3.6.
+This is an HBase client example. It is tested with HBase version 1.1.2 for both stand alone mode and distributed mode. HDInsight HBase 3.6 is used for the distributed mode.
 
-You should install the following before you start:
+You should install the following before you begin:
 1. JDK 1.8.x
 2. Maven 3.x
 3. (Optional) Apache HBase 1.1.2 if you want to try the standalone mode.
@@ -9,7 +9,8 @@ Here is how to compile and run the example.
 ```command line
 >git clone https://github.com/kojish/hbase-client.git
 >cd hbase-client
-Set the proper zookeeper quorum to ZOOKEEPER_QUORUM in the code. The value of ZOOKEEPER_QUORUM can be obtained from HBase's configuration screen in Ambari or hbase-site.xml.
+# Set the proper zookeeper quorum to ZOOKEEPER_QUORUM in the code.
+# The value of ZOOKEEPER_QUORUM can be obtained from HBase's configuration screen in Ambari or hbase-site.xml.
 >mvn package
 >java -cp ./target/hbase-client-example-0.0.1-SNAPSHOT.jar ms.epg.example.HBaseClientExample
 ```
