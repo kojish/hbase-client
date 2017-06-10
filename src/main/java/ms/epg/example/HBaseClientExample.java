@@ -36,7 +36,8 @@ import org.apache.hadoop.hbase.io.compress.Compression.Algorithm;
  *    +-----------------------------------------------------+
  */
 public class HBaseClientExample {
-    private final String ZOOKEEPER_QUORUM = "zk2-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net,zk1-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net,zk0-khbase.bodp3wmw03uebcky0gsybawyte.mx.internal.cloudapp.net";
+    // Ambari -> HBase -> Configs -> Advanced -> Advanced hbase-site -> hbase.zookeeper.quorum
+    private final String ZOOKEEPER_QUORUM = "zk1-kshbas.4wywrj2qog3ejkybuzqsg5kuzf.mx.internal.cloudapp.net,zk0-kshbas.4wywrj2qog3ejkybuzqsg5kuzf.mx.internal.cloudapp.net,zk3-kshbas.4wywrj2qog3ejkybuzqsg5kuzf.mx.internal.cloudapp.net";
     private final String COLUMN_FAMILY_CP = "cp";
     private final String COLUMN_FAMILY_CT = "ct";
     
@@ -46,20 +47,20 @@ public class HBaseClientExample {
     /*
      * Create a new table. If it is already existed, re-create a new one.
      */
-    public void createTable(String tableName) throws IOException {
-        try (Admin admin = connection.getAdmin()) {
+    public void createTableIfNotExists(String tableName) throws IOException {
+
+        try(Admin admin = connection.getAdmin()) {
             HTableDescriptor table = new HTableDescriptor(TableName.valueOf(tableName));
             table.addFamily(new HColumnDescriptor(COLUMN_FAMILY_CT).setCompressionType(Algorithm.NONE));
             table.addFamily(new HColumnDescriptor(COLUMN_FAMILY_CP).setCompressionType(Algorithm.NONE));
             if (admin.tableExists(table.getTableName())) {
                 System.out.println("Table [" + table.getTableName().getNameAsString()
-						+ "] is already existed. Deleting...");
-                admin.disableTable(table.getTableName());
-                admin.deleteTable(table.getTableName());
-            }
-            System.out.print("Creating new table... ");
-            admin.createTable(table);
-            System.out.println("Done.");
+                                 + "] is already existed.");
+            } else {
+                System.out.print("Creating new table... ");
+                admin.createTable(table);
+                System.out.println("Done.");
+           }
         }
     }
 
@@ -67,11 +68,13 @@ public class HBaseClientExample {
         config = HBaseConfiguration.create();
         config.set("zookeeper.znode.parent","/hbase-unsecure");
         config.set("hbase.zookeeper.quorum", ZOOKEEPER_QUORUM);
-        connection = ConnectionFactory.createConnection();
+        config.set("hbase.zookeeper.property.clientPort", "2181");
+        config.set("hbase.cluster.distributed", "true");
+        connection = ConnectionFactory.createConnection(config);
     }
 	
     public void close() throws IOException {
-		if(connection != null) connection.close();
+        if( (connection != null) && (!connection.isClosed())) connection.close();
     }
 
     // Write the given data to the table. Assuming the table is created in createTable().
@@ -117,7 +120,7 @@ public class HBaseClientExample {
         
         HBaseClientExample hc = new HBaseClientExample();
         hc.setUp();
-        hc.createTable(TABLE_NAME);
+        hc.createTableIfNotExists(TABLE_NAME);
         hc.write(TABLE_NAME, src);
         hc.readAll(TABLE_NAME);
         hc.close();
