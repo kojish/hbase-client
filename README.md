@@ -12,7 +12,7 @@ Here is how to compile and run the example.
 # Set the proper zookeeper quorum to ZOOKEEPER_QUORUM in the code.
 # The value of ZOOKEEPER_QUORUM can be obtained from HBase's configuration screen in Ambari or hbase-site.xml.
 >mvn package
->java -cp ./target/hbase-client-example-0.0.1-SNAPSHOT.jar mscs.HBaseClientv2.java
+>java -cp ./target/hbase-client-example-0.0.1-SNAPSHOT.jar mscs.HBaseClientv2
 ```
 Then, you will see the following log.
 ```
