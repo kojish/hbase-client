@@ -60,19 +60,20 @@ public class HBaseClientv2 {
         try(Admin admin = connection.getAdmin()) {
 
             TableName table = TableName.valueOf(tableName);
+            if (admin.tableExists(table)) {
+                System.out.println("Table [" + tableName + "] is already existed.");
+		return;
+            }
+		
             TableDescriptorBuilder builder = TableDescriptorBuilder.newBuilder(table);
             for(byte[] cf : columnFamilies) {
                 System.out.println("CF: " + new String(cf));
                 builder.setColumnFamily(ColumnFamilyDescriptorBuilder.of(cf));
             }
 
-            if (admin.tableExists(table)) {
-                System.out.println("Table [" + tableName + "] is already existed.");
-            } else {
-                System.out.print("Creating new table... ");
-                admin.createTable(builder.build());
-                System.out.println("Done.");
-           }
+            System.out.println("Creating a new table... ");
+            admin.createTable(builder.build());
+            System.out.println("Done.");
         }
     }
 
