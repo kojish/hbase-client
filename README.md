@@ -4,6 +4,7 @@ You should install the following before you begin:
 1. JDK 1.8.x
 2. Maven 3.x
 3. HBase cluster needs to be up and running if you want to run the example application.
+
 Note: the application needs to run on a head node of HBase cluster or a VM which resides in the same VNET to get an access to the cluster.
 
 Here is how to compile and run the example.
